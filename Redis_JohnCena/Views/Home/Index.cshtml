@@ -2,6 +2,183 @@
     ViewBag.Title = "Home Page";
 }
 
+@section scripts {
+
+@Scripts.Render("~/bundles/echarts")
+
+<script type="text/javascript">
+    function ShowCPUChart()
+    {
+        // 基於準備好的DOM，初始化echarts.js
+        var myChart = echarts.init(document.getElementById('cpu'));
+
+        // 設定圖表數據
+        var option = {
+            title: {
+                text: 'CPU Usage',
+                //subtext: '纯属虚构'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataZoom: {},
+                    dataView: { readOnly: false },
+                    magicType: { type: ['line', 'bar'] },
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                name: '日期',
+                type: 'category',
+                boundaryGap: false,
+                data: ['2/28', '3/15', '3/31', '4/15', '4/30', '5/15', '5/31', '6/15', '6/30', '7/15', '7/31', '8/15', '8/31', '9/15', '9/30']
+            },
+            yAxis: {
+                name: '平均使用率(%)',
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value}'
+                }
+            },
+            series: [
+				{
+				    name: '使用率',
+				    type: 'line',
+				    data: [81, 90, 96, 81, 86, 93, 90, 81, 90, 96, 81, 86, 93, 90, 100],
+				}
+            ]
+        };
+
+        // 顯示圖表
+        myChart.setOption(option);
+    }
+    ShowCPUChart();
+
+    function ShowMemoryChart()
+    {
+        // 基於準備好的DOM，初始化echarts.js
+        var myChart = echarts.init(document.getElementById('memory'));
+
+        // 設定圖表數據
+        var option = {
+            title: {
+                text: 'Memory Usage',
+                left: '50%',
+                textAlign: 'center'
+            },
+            tooltip: {
+                trigger: 'asix',
+                axisPointer: {
+                    lineStyle: {
+                        color: '#ddd'
+                    }
+                },
+                backgroundColor: 'rgba(255,255,255,1)',
+                padding: [5, 10],
+                textStyle: {
+                    color: '#7588E4',
+                },
+                extraCssText: 'box-shadow: 0 0 5px rgba(0,0,0,0.3)'
+            },
+            legend: {
+                right: 20,
+                orient: 'vertical',
+                data: ['今日', '昨日']
+            },
+            xAxis: {
+                name: '時間',
+                type: 'category',
+                data: ['00:00', '2:00', '4:00', '6:00', '8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', "22:00"],
+                boundaryGap: false,
+                splitLine: {
+                    show: true,
+                    interval: 'auto',
+                    lineStyle: {
+                        color: ['#D4DFF5']
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#609ee9'
+                    }
+                },
+                axisLabel: {
+                    margin: 10,
+                    textStyle: {
+                        fontSize: 14
+                    }
+                }
+            },
+            yAxis: {
+                name: 'Byte',
+                type: 'value',
+                splitLine: {
+                    lineStyle: {
+                        color: ['#D4DFF5']
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#609ee9'
+                    }
+                },
+                axisLabel: {
+                    margin: 10,
+                    textStyle: {
+                        fontSize: 14
+                    }
+                }
+            },
+            series: [{
+                name: '今日',
+                type: 'line',
+                smooth: true,
+                showSymbol: false,
+                symbol: 'circle',
+                symbolSize: 6,
+                data: ['1200', '1400', '1008', '1411', '1026', '1288', '1300', '800', '1100', '1000', '1118', '1322'],
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(199, 237, 250,0.5)'
+                        }, {
+                            offset: 1,
+                            color: 'rgba(199, 237, 250,0.2)'
+                        }], false)
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#f7b851'
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        width: 3
+                    }
+                }
+            }]
+        };
+
+        // 顯示圖表
+        myChart.setOption(option);
+    }
+    ShowMemoryChart();
+</script>
+
+}
+
 <div class="jumbotron">
     <h1>ASP.NET</h1>
     <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
@@ -10,12 +187,10 @@
 
 <div class="row">
     <div class="col-md-6">
-        <h2>CPU Usage</h2>
-        <img src="~/Resource/images/CPU_usage.png" width="500" />
+        <div id="cpu" style="width: 500px; height:400px;"></div>
     </div>
     <div class="col-md-6">
-        <h2>Memory Usage</h2>
-        <img src="~/Resource/images/Memory_usage.png" width="500" />
+        <div id="memory" style="width: 500px; height:400px;"></div>
     </div>
 </div>
 <div class="row">
