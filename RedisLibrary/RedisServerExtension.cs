@@ -89,11 +89,17 @@ namespace RedisLibrary
         /// </summary>
         /// <param name="keyName">key名稱</param>
         /// <returns>key名稱</returns>
-        public string GetFilterKey(string keyName)
+        public IEnumerable<string> GetFilterKey(string keyName)
         {
-            var key = server.Keys(pattern: keyName);
+            var keys = server.Keys(pattern: keyName);
 
-            return key.FirstOrDefault();
+            List<string> keyList = new List<string>();
+
+            foreach (var key in keys)
+            {
+                keyList.Add(key.ToString());
+            }
+            return keyList;
         }
 
         /// <summary>
@@ -112,6 +118,26 @@ namespace RedisLibrary
         public ServerCounters GetServerStatic()
         {
             return server.GetCounters();
+        }
+
+        /// <summary>
+        /// Gets the value.
+        /// </summary>
+        /// <param name="keyName">keyName</param>
+        /// <returns>value</returns>
+        public string GetValue(string keyName)
+        {
+            return db.StringGet(keyName);
+        }
+
+
+        public long GetValueMemory(string keyName)
+        {
+            var value = db.StringGet(keyName);
+
+            byte[] byteArray = System.Text.Encoding.Default.GetBytes(value);
+            long memory = byteArray.LongLength;
+            return memory;
         }
     }
 }

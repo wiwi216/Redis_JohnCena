@@ -95,9 +95,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\RedisLibrary\RedisLibrary.csproj">
       <Project>{fdcb3770-c6ef-4d03-bcba-9d89f75164d9}</Project>
       <Name>RedisLibrary</Name>
