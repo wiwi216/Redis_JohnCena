@@ -26,5 +26,12 @@ namespace Redis_JohnCena.Controllers
 
             return View();
         }
+
+        public ActionResult Content()
+        {
+            ViewBag.Message = "Your content page.";
+
+            return View();
+        }
     }
 }
