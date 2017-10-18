@@ -1,5 +1,0 @@
-D:\Git_Project\Redis_JohnCena\Redis_JohnCena\Redis_JohnCena.Adapter\bin\Debug\Redis_JohnCena.Adapter.dll
-D:\Git_Project\Redis_JohnCena\Redis_JohnCena\Redis_JohnCena.Adapter\bin\Debug\Redis_JohnCena.Adapter.pdb
-D:\Git_Project\Redis_JohnCena\Redis_JohnCena\Redis_JohnCena.Adapter\obj\Debug\Redis_JohnCena.Adapter.csprojResolveAssemblyReference.cache
-D:\Git_Project\Redis_JohnCena\Redis_JohnCena\Redis_JohnCena.Adapter\obj\Debug\Redis_JohnCena.Adapter.dll
-D:\Git_Project\Redis_JohnCena\Redis_JohnCena\Redis_JohnCena.Adapter\obj\Debug\Redis_JohnCena.Adapter.pdb
