@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Redis_JohnCena\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,14 +44,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataClass\CommandProcessedChart.cs" />
     <Compile Include="DataClass\CPUChart.cs" />
     <Compile Include="DataClass\MemoryChart.cs" />
+    <Compile Include="DataClass\RedisInfo.cs" />
+    <Compile Include="DataClass\ThroughputChart.cs" />
     <Compile Include="Module\Implement\ChartsModule.cs" />
     <Compile Include="Module\Interface\IChartsModule.cs" />
     <Compile Include="Module\ModuleFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\RedisLibrary\RedisLibrary.csproj">
+      <Project>{FAF04E00-F252-414F-B5F0-CF692672492C}</Project>
+      <Name>RedisLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

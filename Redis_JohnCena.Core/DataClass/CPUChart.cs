@@ -6,7 +6,7 @@ using System.Web;
 namespace Redis_JohnCena.Models
 {
     /// <summary>
-    /// CPU圖表模型
+    /// Redis CPU圖表模型
     /// </summary>
     [Serializable]
     public class CPUChart

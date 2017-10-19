@@ -20,9 +20,13 @@ namespace Redis_JohnCena.Controllers
 
         public ActionResult Index()
         {
+            var redisInfoList = this.ChartsModule.GetRedisInfoData();
+
             var model = new ChartsViewModel();
-            model.CPUChart = this.ChartsModule.GetCPUData();
-            model.MemoryChart = this.ChartsModule.GetMemoryData();
+            model.CPUChart = this.ChartsModule.GetCPUInfo(redisInfoList);
+            model.MemoryChart = this.ChartsModule.GetMemoryInfo(redisInfoList);
+            model.CommandProcessedChart = this.ChartsModule.GetCommandProcessedCount(redisInfoList);
+            model.ThroughputChart = this.ChartsModule.GetThroughPutData(redisInfoList);
 
             return View(model);
         }

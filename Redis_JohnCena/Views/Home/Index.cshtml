@@ -17,6 +17,7 @@
         // 設定圖表數據
         var option = {
             title: {
+                left: '35%',
                 text: '@Model.CPUChart.Title',
                 //subtext: '纯属虚构'
             },
@@ -41,7 +42,7 @@
             },
             yAxis: {
                 name: '@Model.CPUChart.YAxisName',
-                data: @Html.Raw(Json.Encode(Model.CPUChart.YAxisList)),
+                @* data: @Html.Raw(Json.Encode(Model.CPUChart.YAxisList)), *@
                 type: 'value',
                 axisLabel: {
                     formatter: '{value}'
@@ -74,19 +75,22 @@
                 textAlign: 'center'
             },
             tooltip: {
-                trigger: 'asix',
-                axisPointer: {
-                    lineStyle: {
-                        color: '#ddd'
-                    }
-                },
-                backgroundColor: 'rgba(255,255,255,1)',
-                padding: [5, 10],
-                textStyle: {
-                    color: '#7588E4',
-                },
-                extraCssText: 'box-shadow: 0 0 5px rgba(0,0,0,0.3)',
+                trigger: 'axis'
             },
+            //tooltip: {
+            //    trigger: 'asix',
+            //    axisPointer: {
+            //        lineStyle: {
+            //            color: '#ddd'
+            //        }
+            //    },
+            //    backgroundColor: 'rgba(255,255,255,1)',
+            //    padding: [5, 10],
+            //    textStyle: {
+            //        color: '#7588E4',
+            //    },
+            //    extraCssText: 'box-shadow: 0 0 5px rgba(0,0,0,0.3)',
+            //},
             //legend: {
             //    right: 20,
             //    orient: 'vertical',
@@ -141,7 +145,7 @@
                         fontSize: 14
                     }
                 },
-                data: @Html.Raw(Json.Encode(Model.MemoryChart.YAxisList)),
+                @* data: @Html.Raw(Json.Encode(Model.MemoryChart.YAxisList)), *@
             },
             series: [{
                 name: '數據',
@@ -179,6 +183,84 @@
         myChart.setOption(option);
     }
     ShowMemoryChart();
+
+    function ShowCommandProcessedChart()
+    {
+        // 基於準備好的DOM，初始化echarts.js
+        var myChart = echarts.init(document.getElementById('commandCount'));
+
+        // 設定圖表數據
+        var option = {
+            title: {
+                text: '@Model.CommandProcessedChart.Title',
+                left: '50%',
+                textAlign: 'center'
+            },
+            xAxis: {
+                name: '@Model.CommandProcessedChart.XAxisName',
+                data: @Html.Raw(Json.Encode(Model.CommandProcessedChart.XAxisList)),
+            },
+            tooltip: {
+                show: true
+            },
+            yAxis: {
+                name: '@Model.CommandProcessedChart.YAxisName',
+                //data: @Html.Raw(Json.Encode(Model.CommandProcessedChart.XAxisList)),
+            },
+            series: [{
+                type: 'line',
+                data: @Html.Raw(Json.Encode(Model.CommandProcessedChart.DataList)),
+            }, {
+                type: 'bar',
+                data: @Html.Raw(Json.Encode(Model.CommandProcessedChart.DataList)),
+            }]
+        };
+
+        // 顯示圖表
+        myChart.setOption(option);
+    }
+    ShowCommandProcessedChart();
+
+    function ShowThroughputChart()
+    {
+        // 基於準備好的DOM，初始化echarts.js
+        var myChart = echarts.init(document.getElementById('throughput'));
+
+        // 設定圖表數據
+        var option = {
+            title: {
+                text: '@Model.ThroughputChart.Title',
+                left: '50%',
+                textAlign: 'center'
+            },
+            tooltip : {
+                trigger: 'axis'
+            },
+            xAxis: {
+                name: '@Model.ThroughputChart.XAxisName',
+                data: @Html.Raw(Json.Encode(Model.ThroughputChart.XAxisList)),
+            },
+            yAxis: {
+                name: '@Model.ThroughputChart.YAxisName',
+                type : 'value',
+                data: @Html.Raw(Json.Encode(Model.ThroughputChart.YAxisList)),
+            },
+            series: [{
+                type: 'line',
+                data: @Html.Raw(Json.Encode(Model.ThroughputChart.DataList)),
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+            }]
+        };
+
+        // 顯示圖表
+        myChart.setOption(option);
+    }
+    ShowThroughputChart();
 </script>
 
 }
@@ -198,6 +280,14 @@
     </div>
 </div>
 <div class="row">
+    <div class="col-md-6">
+        <div id="commandCount" style="width: 500px; height:400px;"></div>
+    </div>
+    <div class="col-md-6">
+        <div id="throughput" style="width: 500px; height:400px;"></div>
+    </div>
+</div>
+<div class="row" style="display:none;">
     <div class="col-md-4">
         <h2>Cache Hit Ratio</h2>
         <img src="~/Resource/images/CPU_usage.png"  width="350" />

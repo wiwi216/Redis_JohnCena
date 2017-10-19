@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Redis_JohnCena.Models
+namespace Redis_JohnCena.Core.DataClass
 {
     /// <summary>
-    /// Redis Memory圖表模型
+    /// Throughput圖表模型
     /// </summary>
-    [Serializable]
-    public class MemoryChart
+    public class ThroughputChart
     {
         /// <summary>
         /// 圖表標題
