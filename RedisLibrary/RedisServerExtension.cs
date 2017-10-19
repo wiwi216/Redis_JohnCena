@@ -184,7 +184,22 @@ namespace RedisLibrary
         /// <returns></returns>
         public bool KeyExisted(string keyName)
         {
-            return db.KeyExists(keyName);
+            return db.KeyExists(keyName);            
+        }
+
+        /// <summary>
+        /// Gets the client list.
+        /// </summary>
+        /// <returns>ClientIngormation</returns>
+        public Dictionary<string,ClientInfo> GetClientList()
+        {
+            Dictionary<string, ClientInfo> clientInfo = new Dictionary<string, ClientInfo>();
+
+            foreach (var Info in server.ClientList())
+            {
+                clientInfo.Add(Info.Name, Info);
+            }
+            return clientInfo;
         }
 
        
