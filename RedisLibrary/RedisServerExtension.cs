@@ -143,5 +143,50 @@ namespace RedisLibrary
             long memory = byteArray.LongLength;
             return memory;
         }
+
+        /// <summary>
+        /// Deletes the key.
+        /// </summary>
+        /// <param name="keyName">keyName</param>
+        /// <returns>Is Success</returns>
+        public bool DeleteKey(string keyName)
+        {
+            return db.KeyDelete(keyName);
+        }
+
+        /// <summary>
+        /// CreateKeyAndValue
+        /// </summary>
+        /// <param name="keyName">keyName</param>
+        /// <param name="value">value</param>
+        /// <returns>Is Success</returns>
+        public bool CreateKeyAndValue(string keyName,string value,TimeSpan expireTime)
+        {
+            return db.StringSet(keyName, value, expireTime);
+            
+        }
+
+        /// <summary>
+        /// Sets the key expire time.
+        /// </summary>
+        /// <param name="keyName">keyName</param>
+        /// <param name="expire">expireTime</param>
+        /// <returns>Is Success</returns>
+        public bool SetKeyExpireTime(string keyName,TimeSpan expire)
+        {
+            return db.KeyExpire(keyName, expire);
+        }
+
+        /// <summary>
+        /// Key 是否存在
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <returns></returns>
+        public bool KeyExisted(string keyName)
+        {
+            return db.KeyExists(keyName);
+        }
+
+       
     }
 }
