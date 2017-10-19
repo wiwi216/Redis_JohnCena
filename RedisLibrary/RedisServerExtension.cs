@@ -191,17 +191,33 @@ namespace RedisLibrary
         /// Gets the client list.
         /// </summary>
         /// <returns>ClientIngormation</returns>
-        public Dictionary<string,ClientInfo> GetClientList()
+        public IEnumerable<ClientInfo> GetClientList()
         {
-            Dictionary<string, ClientInfo> clientInfo = new Dictionary<string, ClientInfo>();
+            List<ClientInfo> clientInfo = new List<ClientInfo>();
 
             foreach (var Info in server.ClientList())
             {
-                clientInfo.Add(Info.Name, Info);
+                clientInfo.Add(Info);                
             }
-            return clientInfo;
+            return clientInfo;            
         }
 
+        /// <summary>
+        /// Gets the key expire time.
+        /// </summary>
+        /// <param name="keyName">keyName</param>
+        /// <returns>到期時間</returns>
+        public DateTime? GetKeyExpireTime(string keyName)
+        {
+            var timeNow = server.Time().ToUniversalTime();
+
+            var time = db.KeyTimeToLive(keyName);
+            var expire = time == null ? (DateTime?)null : timeNow.Add(time.Value);
+
+            return expire;
+        }
+
+        
        
     }
 }
