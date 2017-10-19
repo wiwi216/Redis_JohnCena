@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redis_JohnCena.Adapter", "R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisLibrary", "RedisLibrary\RedisLibrary.csproj", "{FAF04E00-F252-414F-B5F0-CF692672492C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redis_JohnCena.DataCollector", "Redis_JohnCena.DataCollector\Redis_JohnCena.DataCollector.csproj", "{50C2D664-D7FB-4E6B-AC84-FBEBC8CE7547}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{FAF04E00-F252-414F-B5F0-CF692672492C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAF04E00-F252-414F-B5F0-CF692672492C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAF04E00-F252-414F-B5F0-CF692672492C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50C2D664-D7FB-4E6B-AC84-FBEBC8CE7547}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50C2D664-D7FB-4E6B-AC84-FBEBC8CE7547}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50C2D664-D7FB-4E6B-AC84-FBEBC8CE7547}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50C2D664-D7FB-4E6B-AC84-FBEBC8CE7547}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
