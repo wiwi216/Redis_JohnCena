@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static Redis_JohnCena.Core.Module.Implement.ChartsModule;
 
 namespace Redis_JohnCena.Controllers
 {
@@ -58,11 +59,25 @@ namespace Redis_JohnCena.Controllers
         public ActionResult Content(ContentViewModel model)
         {
             ViewBag.Message = "Your content page.";
+            model.Result = new List<RedisCacheModel>();
+            string searchKey = model.Keyword;
+            if (string.IsNullOrEmpty(searchKey))
+                searchKey = string.Format("Category_{0}", model.CategoryID.ToString());
 
-            model.Result = new List<RedisCacheModel>()
+            IEnumerable<string> keys = _chartsModule.Value.SearchKeysByLike(searchKey);
+
+            foreach (string tempKey in keys)
             {
-                new RedisCacheModel { Key="Category_1",MemorySize=3,ExpireTime=DateTime.Now}
-            };
+                CacheInfo cacheInfo = _chartsModule.Value.GetCacheInfo(tempKey);
+                model.Result.Add(new RedisCacheModel
+                    {
+                        Key = cacheInfo.Key,
+                        Value = cacheInfo.Value,
+                        MemorySize = cacheInfo.MemorySize,
+                        ExpireTime = cacheInfo.ExpireTime
+                    }
+                );
+            }
             
             return View(model);
         }

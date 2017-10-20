@@ -9,7 +9,9 @@ namespace Redis_JohnCena.Models
     {
         public string Key { get; set; }
 
-        public int MemorySize { get; set; }
+        public string Value { get; set; }
+
+        public long MemorySize { get; set; }
 
         public DateTime ExpireTime { get; set; }
     }

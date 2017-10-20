@@ -14,6 +14,12 @@ namespace Redis_JohnCena.Core.Module.Implement
 {
     public class ChartsModule : IChartsModule
     {
+
+        private const string connectionString = "127.0.0.1:6379,allowAdmin=true,abortConnect=false,syncTimeout=3000";
+        private const string IP = "127.0.0.1:6379";
+
+        private Lazy<RedisServerExtension> _redisServerExtension = new Lazy<RedisServerExtension>(() => { return new RedisServerExtension(connectionString, IP); });
+
         /// <summary>
         /// 取得Redis Server資料
         /// </summary>
@@ -22,12 +28,6 @@ namespace Redis_JohnCena.Core.Module.Implement
         {
             //RedisServerExtension redis = new RedisServerExtension("127.0.0.1:6379,allowAdmin=true,abortConnect=false,syncTimeout=3000", "127.0.0.1:6379");
             //var info = redis.GetServerInfo();
-            
-            var connectionString = "127.0.0.1:6379,allowAdmin=true,abortConnect=false,syncTimeout=3000";
-            var IP = "127.0.0.1:6379";
-
-            RedisServerExtension RedisServerExtension = new RedisServerExtension(connectionString, IP);
-
 
             MongoClient _client = new MongoClient("mongodb://localhost");
             var db = _client.GetDatabase("RawData");
@@ -184,5 +184,50 @@ namespace Redis_JohnCena.Core.Module.Implement
 
             return result;
         }
+
+        /// <summary>
+        /// 依條件查詢Redis Key List
+        /// </summary>
+        /// <param name="searchKey">Search Key</param>
+        /// <returns>查詢結果</returns>
+        public IEnumerable<string> SearchKeysByLike(string searchKey)
+        {
+            return _redisServerExtension.Value.GetFilterKey(string.Format("*{0}*", searchKey));
+        }
+
+        /// <summary>
+        /// 依Cache Key取得Cache資訊
+        /// </summary>
+        /// <param name="key">Cache Key</param>
+        /// <returns>Cache資訊</returns>
+        public CacheInfo GetCacheInfo(string key)
+        {
+            CacheInfo result = new CacheInfo();
+            result.Value = _redisServerExtension.Value.GetValue(key);
+            if (!string.IsNullOrEmpty(result.Value))
+            {
+                result.MemorySize = _redisServerExtension.Value.GetValueMemory(result.Value);
+                DateTime? expireTime = _redisServerExtension.Value.GetKeyExpireTime(key);
+                result.ExpireTime = expireTime.HasValue ? DateTime.MinValue : expireTime.Value;
+            }
+            else
+            {
+                result.MemorySize = 0;
+                result.ExpireTime = DateTime.MinValue;
+            }
+            return result;
+        }
+
+        public class CacheInfo
+        {
+            public string Key { get; set; }
+
+            public string Value { get; set; }
+
+            public long MemorySize { get; set; }
+
+            public DateTime ExpireTime { get; set; }
+        }
+
     }
 }

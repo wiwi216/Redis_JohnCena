@@ -133,12 +133,10 @@ namespace RedisLibrary
         /// <summary>
         /// Gets the value memory.
         /// </summary>
-        /// <param name="keyName">keyName</param>
+        /// <param name="keyName">value</param>
         /// <returns>byteMemory</returns>
-        public long GetValueMemory(string keyName)
+        public long GetValueMemory(string value)
         {
-            var value = db.StringGet(keyName);
-
             byte[] byteArray = System.Text.Encoding.Default.GetBytes(value);
             long memory = byteArray.LongLength;
             return memory;

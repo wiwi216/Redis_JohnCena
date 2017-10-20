@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Redis_JohnCena.Core.Module.Implement.ChartsModule;
 
 namespace Redis_JohnCena.Core.Module.Interface
 {
@@ -40,5 +41,19 @@ namespace Redis_JohnCena.Core.Module.Interface
         /// </summary>
         /// <returns></returns>
         ThroughputChart GetThroughPutData(List<RedisInfo> list);
+
+        /// <summary>
+        /// 依條件查詢Redis Key List
+        /// </summary>
+        /// <param name="searchKey">Search Key</param>
+        /// <returns>查詢結果</returns>
+        IEnumerable<string> SearchKeysByLike(string searchKey);
+
+        /// <summary>
+        /// 依Cache Key取得Cache資訊
+        /// </summary>
+        /// <param name="key">Cache Key</param>
+        /// <returns>Cache資訊</returns>
+        CacheInfo GetCacheInfo(string key);
     }
 }
