@@ -4,6 +4,94 @@
     ViewBag.Title = "Home Page";
 }
 
+@section styles {
+<style>
+.rwd-table {
+  margin: 1em 0;
+  min-width: 300px;
+  width: 1100px;
+}
+.rwd-table tr {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  text-align:center;
+}
+.rwd-table th {
+  display: none;
+  text-align:center;
+}
+.rwd-table td {
+  display: block;
+  text-align:center;
+}
+.rwd-table td:first-child {
+  padding-top: .5em;
+}
+.rwd-table td:last-child {
+  padding-bottom: .5em;
+}
+.rwd-table td:before {
+  content: attr(data-th) ": ";
+  font-weight: bold;
+  width: 6.5em;
+  display: inline-block;
+}
+.rwd-table td:before {
+display: none;
+}
+.rwd-table th, .rwd-table td {
+  text-align: left;
+}
+.rwd-table th, .rwd-table td {
+display: table-cell;
+padding: .25em .5em;
+}
+.rwd-table th:first-child, .rwd-table td:first-child {
+padding-left: 0;
+}
+.rwd-table th:last-child, .rwd-table td:last-child {
+padding-right: 0;
+}
+
+body {
+  padding: 0 2em;
+  font-family: Montserrat, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color: #444;
+  background: #eee;
+}
+
+h1 {
+  font-weight: normal;
+  letter-spacing: -1px;
+  color: #34495E;
+}
+
+.rwd-table {
+  background: #34495E;
+  color: #fff;
+  border-radius: .4em;
+  overflow: hidden;
+}
+.rwd-table tr {
+  border-color: #46637f;
+}
+.rwd-table th, .rwd-table td {
+  margin: .5em 1em;
+}
+
+.rwd-table th, .rwd-table td {
+padding: 1em !important;
+}
+
+.rwd-table th, .rwd-table td:before {
+  color: #dd5;
+}
+
+</style>
+}
+
 @section scripts {
 
 @Scripts.Render("~/bundles/echarts")
@@ -305,7 +393,27 @@
 
 }
 
-<div class="row" style="padding-top: 50px">
+<div class="row" style="height: 100px;">
+</div>
+
+<table class="rwd-table">
+    <tbody>
+        <tr>
+            <th style="text-align:center;">Total Keys</th>
+            <th style="text-align:center;">Clients</th>
+            <th style="text-align:center;">Slaves</th>
+            <th style="text-align:center;">UpdateTime</th>
+        </tr>
+        <tr>
+            <td data-th="Total Keys" style="text-align:center;">@Model.TotalKeys</td>
+            <td data-th="Clients" style="text-align:center;">@Model.ClientCount</td>
+            <td data-th="Slaves" style="text-align:center;">0</td>
+            <td data-th="UpdateTime" style="text-align:center;">5 days</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="row">
     <div class="col-md-6">
         <div id="cpu" style="width: 500px; height:400px;"></div>
     </div>

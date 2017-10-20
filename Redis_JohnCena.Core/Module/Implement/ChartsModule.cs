@@ -219,6 +219,18 @@ namespace Redis_JohnCena.Core.Module.Implement
             return result;
         }
 
+        public long GetRedisTotalKeys()
+        {
+            var number = _redisServerExtension.Value.GetCacheTotalNumber();
+            return number;
+        }
+
+        public int GetRedisClientCount()
+        {
+            int number = _redisServerExtension.Value.GetClientListCount();
+            return number;
+        }
+
         public class CacheInfo
         {
             public string Key { get; set; }

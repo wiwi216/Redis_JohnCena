@@ -55,5 +55,9 @@ namespace Redis_JohnCena.Core.Module.Interface
         /// <param name="key">Cache Key</param>
         /// <returns>Cache資訊</returns>
         CacheInfo GetCacheInfo(string key);
+
+        long GetRedisTotalKeys();
+
+        int GetRedisClientCount();
     }
 }

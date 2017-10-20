@@ -31,5 +31,15 @@ namespace Redis_JohnCena.Models
         /// Redis Throughput圖表模型
         /// </summary>
         public ThroughputChart ThroughputChart { get; set; }
+
+        /// <summary>
+        /// Redis Key總數
+        /// </summary>
+        public long TotalKeys { get; set; }
+
+        /// <summary>
+        /// Redis Client數量
+        /// </summary>
+        public int ClientCount { get; set; }
     }
 }

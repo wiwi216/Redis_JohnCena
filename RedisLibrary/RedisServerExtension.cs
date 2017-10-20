@@ -201,6 +201,21 @@ namespace RedisLibrary
         }
 
         /// <summary>
+        /// Gets the client list.
+        /// </summary>
+        /// <returns>ClientIngormation</returns>
+        public int GetClientListCount()
+        {
+            List<ClientInfo> clientInfo = new List<ClientInfo>();
+
+            foreach (var Info in server.ClientList())
+            {
+                clientInfo.Add(Info);
+            }
+            return clientInfo.Count();
+        }
+
+        /// <summary>
         /// Gets the key expire time.
         /// </summary>
         /// <param name="keyName">keyName</param>

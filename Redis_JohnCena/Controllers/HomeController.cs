@@ -28,6 +28,8 @@ namespace Redis_JohnCena.Controllers
             model.MemoryChart = this.ChartsModule.GetMemoryInfo(redisInfoList);
             model.CommandProcessedChart = this.ChartsModule.GetCommandProcessedCount(redisInfoList);
             model.ThroughputChart = this.ChartsModule.GetThroughPutData(redisInfoList);
+            model.TotalKeys = this.ChartsModule.GetRedisTotalKeys();
+            model.ClientCount = this.ChartsModule.GetRedisClientCount();
 
             return View(model);
         }
