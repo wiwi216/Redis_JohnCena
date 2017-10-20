@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Redis_JohnCena.DataCollector
@@ -17,16 +18,26 @@ namespace Redis_JohnCena.DataCollector
             var IP = "127.0.0.1:6379";
 
             RedisServerExtension RedisServerExtension = new RedisServerExtension(connectionString, IP);
-            var info = RedisServerExtension.GetServerInfo();
+           
 
             MongoClient _client = new MongoClient("mongodb://localhost");
             var db = _client.GetDatabase("RawData");
 
             var collection = db.GetCollection<RedisInfo>("RedisInfo");
 
-            var document = BsonSerializer.Deserialize<RedisInfo>(info);
-            collection.InsertOne(document);
             
+
+            while (true)
+            {
+                var info = RedisServerExtension.GetServerInfo();
+                var document = BsonSerializer.Deserialize<RedisInfo>(info);
+                collection.InsertOne(document);
+
+                Console.WriteLine("date collected at " + document.CollectTime);
+
+                Thread.Sleep(60000);
+            }
+
         }
     }
 
