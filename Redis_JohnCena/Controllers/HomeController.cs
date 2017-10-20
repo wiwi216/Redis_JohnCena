@@ -49,7 +49,22 @@ namespace Redis_JohnCena.Controllers
         {
             ViewBag.Message = "Your content page.";
 
-            return View();
+            ContentViewModel model = new ContentViewModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Content(ContentViewModel model)
+        {
+            ViewBag.Message = "Your content page.";
+
+            model.Result = new List<RedisCacheModel>()
+            {
+                new RedisCacheModel { Key="Category_1",MemorySize=3,ExpireTime=DateTime.Now}
+            };
+            
+            return View(model);
         }
     }
 }

@@ -1,10 +1,11 @@
-﻿@{
+﻿@model Redis_JohnCena.Models.ContentViewModel
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 <div class="container">
-
     <table class="table">
         <thead>
             <tr>
@@ -56,4 +57,48 @@
             </tr>
         </tbody>
     </table>
+    @using (Html.BeginForm("Content", "Home"))
+    {
+        <div class="jumbotron">
+            <p>Category : </p>
+            @Html.DropDownListFor(model => model.CategoryID, new SelectList(
+                            new List<SelectListItem>
+                            {
+                                new SelectListItem { Text="3C資訊",Value="1"},
+                                new SelectListItem { Text="視聽家電",Value="2"},
+                                new SelectListItem { Text="民生日用",Value="3"},
+                                new SelectListItem { Text="傢俱寢飾",Value="4"},
+                            }, "Value", "Text"), new { @class = "n-form--control" })
+            <p>Keyword : </p>@Html.TextBoxFor(model => model.Keyword, new { @class = "n-form--control", placeholder = "請輸入關鍵字" })
+            <button class="btn btn-primary btn-lg" type="submit">Search &raquo;</button>
+        </div>
+        if (Model.Result != null && Model.Result.Count() > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Memory Size</th>
+                        <th>Expire</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Result)
+                    {
+                        <tr>
+                            <td>@item.Key</td>
+                            <td>@item.MemorySize</td>
+                            <td>@item.ExpireTime</td>
+                            <td>
+                                <button class="btn">更新</button>
+                                <button class="btn">刪除</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+    
 </div>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace Redis_JohnCena.Core.DataClass
 {
     public class RedisInfo
     {
+        [BsonId]
+        public MongoDB.Bson.ObjectId _id { get; set; }
         public Server Server { get; set; }
         public Clients Clients { get; set; }
         public Memory Memory { get; set; }
