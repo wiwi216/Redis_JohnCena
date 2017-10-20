@@ -29,6 +29,9 @@ namespace Redis_JohnCena
 
             bundles.Add(new ScriptBundle("~/bundles/echarts").Include(
                       "~/Scripts/echarts.js"));
+
+            bundles.Add(new StyleBundle("~/Content/font-awesome").Include(
+                      "~/Content/font-awesome.css"));
         }
     }
 }
