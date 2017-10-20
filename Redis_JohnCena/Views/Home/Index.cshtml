@@ -53,6 +53,11 @@
 				    name: '使用率',
 				    type: 'line',
 				    data: @Html.Raw(Json.Encode(Model.CPUChart.DataList)),
+				    itemStyle: {
+				        normal: {
+				            color: '#6def6f'
+				        }
+				    },
 				}
             ]
         };
@@ -71,11 +76,21 @@
         var option = {
             title: {
                 text: '@Model.MemoryChart.Title',
-                left: '50%',
+                left: '35%',
                 textAlign: 'center'
             },
             tooltip: {
                 trigger: 'axis'
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataZoom: {},
+                    dataView: { readOnly: false },
+                    magicType: { type: ['line', 'bar'] },
+                    restore: {},
+                    saveAsImage: {}
+                }
             },
             //tooltip: {
             //    trigger: 'asix',
@@ -193,7 +208,7 @@
         var option = {
             title: {
                 text: '@Model.CommandProcessedChart.Title',
-                left: '50%',
+                left: '35%',
                 textAlign: 'center'
             },
             xAxis: {
@@ -202,6 +217,16 @@
             },
             tooltip: {
                 show: true
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataZoom: {},
+                    dataView: { readOnly: false },
+                    magicType: { type: ['line', 'bar'] },
+                    restore: {},
+                    saveAsImage: {}
+                }
             },
             yAxis: {
                 name: '@Model.CommandProcessedChart.YAxisName',
@@ -230,11 +255,21 @@
         var option = {
             title: {
                 text: '@Model.ThroughputChart.Title',
-                left: '50%',
+                left: '35%',
                 textAlign: 'center'
             },
             tooltip : {
                 trigger: 'axis'
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataZoom: {},
+                    dataView: { readOnly: false },
+                    magicType: { type: ['line', 'bar'] },
+                    restore: {},
+                    saveAsImage: {}
+                }
             },
             xAxis: {
                 name: '@Model.ThroughputChart.XAxisName',
@@ -254,6 +289,11 @@
                         {type: 'min', name: '最小值'}
                     ]
                 },
+                itemStyle: {
+                    normal: {
+                        color: '#428bca'
+                    }
+                },
             }]
         };
 
@@ -265,7 +305,14 @@
 
 }
 
-<div class="row" style="padding-top: 50px">
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<br />
+<div class="row">
     <div class="col-md-6">
         <div id="cpu" style="width: 500px; height:400px;"></div>
     </div>
