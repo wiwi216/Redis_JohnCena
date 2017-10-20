@@ -203,12 +203,13 @@ namespace Redis_JohnCena.Core.Module.Implement
         public CacheInfo GetCacheInfo(string key)
         {
             CacheInfo result = new CacheInfo();
+            result.Key = key;
             result.Value = _redisServerExtension.Value.GetValue(key);
             if (!string.IsNullOrEmpty(result.Value))
             {
                 result.MemorySize = _redisServerExtension.Value.GetValueMemory(result.Value);
                 DateTime? expireTime = _redisServerExtension.Value.GetKeyExpireTime(key);
-                result.ExpireTime = expireTime.HasValue ? DateTime.MinValue : expireTime.Value;
+                result.ExpireTime = expireTime.HasValue ? expireTime.Value.AddHours(8) : DateTime.MinValue;
             }
             else
             {
